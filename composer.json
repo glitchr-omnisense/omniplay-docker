@@ -1,0 +1,47 @@
+{
+    "name": "omniplay/docker",
+    "type": "library",
+    "description": "Omniplay's Docker hosting, under any PHP host: game-server containers started and stopped through the Docker Engine API (a unix socket or TCP), the image, command and environment of each service given by configuration, the server's ticket secret handed to it in its environment.",
+    "keywords": ["docker", "container", "game-server", "hosting", "multiplayer", "framework-agnostic", "omniplay"],
+    "homepage": "https://github.com/glitchr-omnisense/omniplay-docker",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marco Meyer",
+            "email": "marco.meyer@glitchr.io"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "omnisense/omniplay": "^1.0@dev",
+        "symfony/http-client": "^6.4|^7.0|^8.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^11.0"
+    },
+    "suggest": {
+        "ext-curl": "A Docker Engine on a unix socket is reached through Symfony's CurlHttpClient only"
+    },
+    "autoload": {
+        "psr-4": {
+            "Omniplay\\Docker\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Omniplay\\Docker\\Tests\\": "Tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-1.x": "1.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
