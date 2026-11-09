@@ -111,7 +111,7 @@ final class DockerHostingTest extends TestCase
     {
         $hosting = self::hosting(self::engine());
 
-        self::assertSame(['contracts' => ['hosting'], 'services' => ['game'], 'regions' => ['local'], 'where' => 'Docker Engine at unix:///var/run/docker.sock'], $hosting->capabilities()->toArray());
+        self::assertSame(['contracts' => ['hosting'], 'lookupBy' => [], 'prices' => false, 'player' => null, 'attribution' => null, 'terms' => [], 'keyless' => false, 'services' => ['game'], 'regions' => ['local'], 'where' => 'Docker Engine at unix:///var/run/docker.sock'], $hosting->capabilities()->toArray());
         foreach ([[new Service('relay'), null], [self::service(), 'eu']] as [$service, $region]) {
             try {
                 $hosting->start($service, self::SECRET, $region);
