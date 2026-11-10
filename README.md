@@ -53,6 +53,10 @@ engine's vendor. The MIT licence covers this code only. Whoever runs it is respo
 containers it starts and the secrets it hands them. The authors publish it free of charge and
 accept no liability for its use.
 
+## Usage policy
+
+The package declares its usage policy as data, in [policy.json](policy.json) (omnisense/contracts' schema). The site's own Docker Engine: no rate limit, everything allowed (Docker Engine is under Apache-2.0). Docker Desktop's subscription terms, for businesses over 250 employees or US$10 million in revenue, are in the notes. With nothing to count, omniplay's registry gives the provider itself; a site's own limit (`'policy' => ['rateLimits' => [['max' => 10, 'window' => 'minute', 'operations' => ['start']]]]`) puts it behind its guard.
+
 ## Licence
 
 MIT.

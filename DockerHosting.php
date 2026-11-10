@@ -13,6 +13,8 @@ use Omniplay\Model\Health;
 use Omniplay\Model\Server;
 use Omniplay\Model\Service;
 use Omniplay\ProviderInterface;
+use Omnisense\Contracts\Policy\DeclaresUsagePolicyInterface;
+use Omnisense\Contracts\Policy\UsagePolicy;
 
 /**
  * Game servers as containers of a Docker Engine, through its HTTP API: a
@@ -31,8 +33,13 @@ use Omniplay\ProviderInterface;
  * Its labels (omniplay.server, .service, .capacity, .region, .tags,
  * .engine, .port) are what running() rebuilds the servers from.
  */
-final class DockerHosting implements ProviderInterface, HostingInterface
+final class DockerHosting implements ProviderInterface, HostingInterface, DeclaresUsagePolicyInterface
 {
+    /** Docker's usage policy, as its terms read on the day it says (provenance.verifiedAt). */
+    public const POLICY = __DIR__.'/policy.json';
+
+    private static ?UsagePolicy $policy = null;
+
     public const LABEL = 'omniplay.';
 
     /**
@@ -65,9 +72,14 @@ final class DockerHosting implements ProviderInterface, HostingInterface
         return 'Docker';
     }
 
+    public function usagePolicy(): UsagePolicy
+    {
+        return self::$policy ??= UsagePolicy::fromFile(self::POLICY);
+    }
+
     public function capabilities(): Capabilities
     {
-        return new Capabilities(hosting: true, services: array_keys($this->templates), regions: [$this->region], where: $this->where);
+        return new Capabilities(hosting: true, services: array_keys($this->templates), regions: [$this->region], where: $this->where, policy: $this->usagePolicy());
     }
 
     public function start(Service $service, string $secret, ?string $region = null, array $tags = []): Server

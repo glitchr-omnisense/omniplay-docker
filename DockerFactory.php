@@ -73,7 +73,7 @@ final class DockerFactory extends ProviderFactory
         }
 
         return new DockerHosting(
-            new JsonClient($this->http ?? HttpClient::create(['timeout' => 30]), 'Docker', ['Accept' => 'application/json', 'User-Agent' => (string) $c->string('user_agent')]),
+            new JsonClient($this->http ?? HttpClient::create(['timeout' => 30]), 'Docker', ['Accept' => 'application/json', 'User-Agent' => (string) $c->string('user_agent')], $c->backoff()),
             $base.('' !== $version ? '/'.$version : ''),
             $templates,
             (string) $c->string('public_host'),
