@@ -35,6 +35,18 @@ Options: `services` (required; see [docs/index.md](docs/index.md)), `host`, `api
 `auto_remove`, `stop_timeout`, `tls`, `heartbeat_url`, `user_agent`. The image must be on the
 engine already: an image it does not have is a `ProviderException` saying to pull it.
 
+## Install
+
+```sh
+composer require omniplay/docker
+```
+
+It requires `omnisense/omniplay` `^1.0`, installed with it. A real call needs: no account: a Docker
+Engine's socket (a unix socket, or TCP with TLS) on the host the game servers run on. With no
+account, its tests run on recorded answers (a `MockHttpClient`), and
+[omnisense/omniplay](https://github.com/glitchr-omnisense/omniplay#install-and-a-first-call)'s
+README has a first call that runs without one.
+
 ## Verified, and not
 
 - Verified (omnisense/omniplay's harness, PHP 8.4, 2026-11-08): create, start, inspect, a
